@@ -1,0 +1,20 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Obsidian
+.obsidian/
+.trash/
+
+# Claude Code (keep .claude/skills/, ignore the rest)
+.claude/*
+!.claude/skills/
+
+# Claudian plugin
+.claudian/
+
+# Editor temps
+*.swp
+*.swo
+*~
