@@ -36,11 +36,24 @@ Three layers:
 
 1. **Clone** this repository:
    ```bash
-   git clone https://github.com/tommy-fcy/labwiki.git my-research-topic
-   cd my-research-topic
+   git clone https://github.com/tommy-fcy/labwiki.git my-wiki
+   cd my-wiki
    ```
 
-2. **Install [Claudian](https://github.com/YishenTu/claudian)** (optional — Claude Code inside Obsidian):
+2. **Choose a mode** — copy one of the two templates to `CLAUDE.md`:
+
+   | Mode | Template | Use case |
+   |------|----------|----------|
+   | **Project** | `templates/project.md` | Focused on one research topic, deep dive |
+   | **Library** | `templates/library.md` | Broad reading across many areas, building macro understanding |
+
+   ```bash
+   cp templates/project.md CLAUDE.md    # for a focused project
+   # OR
+   cp templates/library.md CLAUDE.md    # for a broad knowledge base
+   ```
+
+3. **Install [Claudian](https://github.com/YishenTu/claudian)** (optional — Claude Code inside Obsidian):
 
    macOS / Linux:
    ```bash
@@ -54,13 +67,13 @@ Three layers:
 
    Then in Obsidian: Settings → Community Plugins → disable Restricted Mode → enable **Claudian**.
 
-3. **Open in Claude Code**:
+4. **Open in Claude Code**:
    ```bash
    claude
    ```
-   Claude reads `CLAUDE.md` and asks you to fill in the project identity (topic, description).
+   Claude reads `CLAUDE.md` and asks you to fill in the identity (topic for project mode, areas for library mode).
 
-4. **Open in Obsidian** (optional): Open the project folder as an Obsidian vault. Browse the wiki with graph view, Dataview queries, and wikilink navigation.
+5. **Open in Obsidian** (optional): Open the project folder as an Obsidian vault. Browse the wiki with graph view, Dataview queries, and wikilink navigation.
 
 ### Usage
 
@@ -156,6 +169,18 @@ Claude searches the wiki, synthesizes an answer with citations, and optionally f
 - YAML frontmatter on every page (works with Obsidian Properties and Dataview)
 - Tags only in frontmatter — clean for Dataview queries
 - Graph view shows the knowledge structure
+
+## Two modes
+
+### Project mode (`templates/project.md`)
+
+For focused research: one topic, one evolving synthesis. Everything connects to a single thesis. Includes experiment tracking. Checkpoints measure project progress.
+
+### Library mode (`templates/library.md`)
+
+For broad knowledge accumulation. Organizes knowledge by **areas** (e.g., compression, reasoning, agents). Each area has its own overview page. A top-level `landscape.md` captures cross-area insights and trends. Checkpoints are periodic reading reviews. Great for building research taste and macro-level understanding.
+
+Both modes share the same tools, skills, page schemas, and conventions. They differ only in how knowledge is organized and synthesized.
 
 ## Design philosophy
 
