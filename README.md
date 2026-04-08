@@ -29,23 +29,38 @@ Three layers:
 ### Prerequisites
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI installed
+- [GitHub CLI](https://cli.github.com/) (`gh`) installed
 - [Obsidian](https://obsidian.md/) (recommended for browsing, not required)
 
 ### Setup
 
-1. **Copy** this repository (or use it as a template):
+1. **Clone** this repository:
    ```bash
    git clone https://github.com/tommy-fcy/labwiki.git my-research-topic
    cd my-research-topic
    ```
 
-2. **Open in Claude Code**:
+2. **Install [Claudian](https://github.com/YishenTu/claudian)** (optional — Claude Code inside Obsidian):
+
+   macOS / Linux:
+   ```bash
+   mkdir -p .obsidian/plugins/claudian && gh release download --repo YishenTu/claudian --pattern "main.js" --pattern "manifest.json" --pattern "styles.css" --dir .obsidian/plugins/claudian
+   ```
+
+   Windows (PowerShell):
+   ```powershell
+   mkdir -Force .obsidian\plugins\claudian | Out-Null; gh release download --repo YishenTu/claudian --pattern "main.js" --pattern "manifest.json" --pattern "styles.css" --dir .obsidian\plugins\claudian
+   ```
+
+   Then in Obsidian: Settings → Community Plugins → disable Restricted Mode → enable **Claudian**.
+
+3. **Open in Claude Code**:
    ```bash
    claude
    ```
    Claude reads `CLAUDE.md` and asks you to fill in the project identity (topic, description).
 
-3. **Open in Obsidian** (optional): Open the project folder as an Obsidian vault. Browse the wiki with graph view, Dataview queries, and wikilink navigation.
+4. **Open in Obsidian** (optional): Open the project folder as an Obsidian vault. Browse the wiki with graph view, Dataview queries, and wikilink navigation.
 
 ### Usage
 
