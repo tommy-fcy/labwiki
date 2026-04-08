@@ -302,9 +302,8 @@ When `/ingest` is called with no arguments:
 2. **Read `wiki/.hashlog`** to get already-ingested file hashes.
 3. **Compute SHA256** for each file in `raw/`. Compare against hashlog.
 4. **List unprocessed sources** — files whose hash is not in hashlog.
-5. **Present the list** to user. Ask: "Found N new sources. Ingest all, or select specific ones?"
+5. **Ingest all unprocessed sources automatically.** No need to ask — the user invoked `/ingest` to process everything new.
 6. **For multiple sources**, dispatch parallel Agent subprocesses (one per source) for Steps 1-6 below. Collect results, then do Steps 7-9 once at the end. This is significantly faster than serial processing.
-7. Between sources, briefly confirm with user before continuing.
 
 ### Pre-Checks (single source)
 

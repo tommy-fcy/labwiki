@@ -22,11 +22,9 @@ Follow the **Workflow: Ingest** defined in CLAUDE.md exactly.
 2. **Read `wiki/.hashlog`** to get SHA256 hashes of already-ingested sources
 3. **Compute SHA256** for each file. Use Bash: `sha256sum <file>` or `certutil -hashfile <file> SHA256`
 4. **List unprocessed sources** — files whose hash is not in hashlog
-5. **Present the list** to user:
-   - Show each unprocessed file with its detected type
-   - Ask: "Found N new sources. Ingest all, or select specific ones?"
+5. **Ingest all automatically** — no need to ask. The user invoked `/ingest` to process everything new.
 6. **For multiple sources**: dispatch parallel Agent subprocesses (one per source) for reading + entity extraction. This is 3-5x faster than serial. Collect results, then present all proposed entities to user at once.
-7. After user confirmation, create all pages, then do synthesis/index/log/hashlog updates once at the end.
+7. After user confirmation on proposed entities, create all pages, then do synthesis/index/log/hashlog updates once at the end.
 
 ## Single Mode (with path)
 
