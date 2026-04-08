@@ -1,26 +1,26 @@
 ---
 name: add
-description: Fetch a source and save it to the appropriate raw/ subdirectory. Does NOT process or ingest into the wiki — use /ingest for that.
+description: Fetch a source and save it to the appropriate raw/ subdirectory. Pure download — NO summarization, NO analysis, NO wiki processing. Use /ingest for that.
 argument-hint: <path-or-url> [paper|note|experiment|ref]
-allowed-tools: Read Write Bash WebFetch Glob Skill
+allowed-tools: Read Write Bash WebFetch Glob
 ---
 
 # Add Source to Raw
 
-Fetch and save a source to `raw/`. This is a pure download/copy operation — no wiki processing.
-
 Input: $ARGUMENTS
+
+**CRITICAL: This skill is a pure fetch/save operation. Do NOT summarize, analyze, or extract key points. Just download and save the raw content. All analysis happens later via `/ingest`.**
 
 ## Steps
 
 1. **Parse arguments**
    - First argument: path or URL
-   - Second argument (optional): category — one of `paper`, `note`, `experiment`, `ref`
-   - If category is omitted, infer from source type:
-     - arXiv URL, PDF, `.pdf` → `paper`
-     - `.md`, `.txt` personal notes → `note`
-     - data files, `.csv`, `.xlsx`, experiment logs → `experiment`
-     - everything else (slides, docs, web clips, misc) → `ref`
+   - Second argument (optional): category — `paper`, `note`, `experiment`, `ref`
+   - If category is omitted, infer:
+     - arXiv URL, `.pdf` → `paper`
+     - `.md`, `.txt` → `note`
+     - `.csv`, `.xlsx`, data files → `experiment`
+     - everything else → `ref`
 
 2. **Determine target directory**
 
@@ -31,28 +31,37 @@ Input: $ARGUMENTS
    | experiment | `raw/experiments/` |
    | ref | `raw/refs/` |
 
-3. **Fetch the source**
+3. **Fetch and save** (per source type)
 
-   - **URL (web page, tweet, blog)**: Use WebFetch to retrieve content. Save as markdown: `raw/{category}/{slug}.md`
-   - **arXiv URL** (`arxiv.org/abs/XXXX.XXXXX`): Use WebFetch to get the abstract page. Save as markdown: `raw/papers/{slug}.md`. Note: PDF download requires the user to download manually — inform them of the PDF URL.
-   - **Google Doc URL**: Extract doc ID, use google_drive_fetch (if available), save as markdown to target directory.
-   - **Local file path**: The file is already local. Do NOT copy or move it. Just confirm its location and category.
-   - **PPTX/DOCX/XLSX**: Use the corresponding skill to read, save extracted text as markdown alongside the original.
+   **arXiv PDF URL** (`arxiv.org/pdf/...`):
+   - WebFetch CANNOT download binary PDFs.
+   - Convert to abstract URL: replace `/pdf/` with `/abs/`
+   - Use WebFetch on the abstract URL
+   - Save the fetched content AS-IS to `raw/papers/{slug}.md` — do NOT rewrite or summarize
+   - Tell user: "PDF must be downloaded manually: https://arxiv.org/pdf/XXXX.XXXXX — save it to `raw/papers/`"
+
+   **arXiv abstract URL** (`arxiv.org/abs/...`):
+   - Use WebFetch to get the page
+   - Save the fetched content AS-IS to `raw/papers/{slug}.md`
+   - Tell user the PDF URL for manual download
+
+   **Web URL** (article, blog, tweet):
+   - Use WebFetch to retrieve content
+   - Save the fetched markdown AS-IS to `raw/{category}/{slug}.md` — do NOT rewrite or summarize
+
+   **Google Doc URL**:
+   - Extract doc ID, use google_drive_fetch (if available)
+   - Save raw content to target directory
+
+   **Local file path**:
+   - The file is already on disk. Do NOT copy or move it.
+   - Just confirm: "File already at `{path}`, categorized as `{category}`. Run `/ingest` to process."
 
 4. **Generate filename**
    - Slug: lowercase, hyphens, max 60 chars
-   - For papers: use short title or `{firstauthor}-{year}-{keyword}` if title is too long
-   - Avoid overwriting existing files — check first
+   - Check for existing files — do not overwrite
 
-5. **Report to user**
-   - File saved at: `raw/{category}/{filename}`
-   - Remind: run `/ingest` to process new sources into the wiki
-
-## Examples
-
-```
-/add https://arxiv.org/abs/1706.03762 paper
-/add https://x.com/karpathy/status/123456 ref
-/add https://docs.google.com/document/d/1abc.../edit ref
-/add raw/experiments/results.csv experiment    # already local, just confirm
-```
+5. **Report**
+   - "Saved to: `raw/{category}/{filename}`"
+   - "Run `/ingest` to process into the wiki."
+   - Nothing else. No summary. No analysis.
