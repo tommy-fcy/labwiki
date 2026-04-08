@@ -199,8 +199,11 @@ captured_at: "{now}"
 
 Source: {url}
 """
-    filename = f"arxiv_{arxiv_id.replace('.', '_')}.md"
-    return content, filename
+    # Generate slug from title
+    slug = re.sub(r"[^\w\s-]", "", title.lower())
+    slug = re.sub(r"[\s]+", "-", slug).strip("-")[:60]
+    pdf_filename = f"{slug}.pdf"
+    return pdf_filename, arxiv_id
 
 
 def fetch_webpage(url: str) -> tuple[str, str]:
@@ -254,7 +257,13 @@ def fetch(url: str, category: str | None = None, root: Path = Path(".")) -> Path
     if url_type == "tweet":
         content, filename = fetch_tweet(url)
     elif url_type == "arxiv":
-        content, filename = fetch_arxiv(url)
+        pdf_filename, arxiv_id = fetch_arxiv(url)
+        pdf_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+        pdf_out = unique_path(target_dir, pdf_filename)
+        pdf_out.write_bytes(_urlopen(pdf_url).read())
+        print(f"[fetch] PDF saved: {pdf_out.relative_to(root)}")
+        print(f"[fetch] Source: https://arxiv.org/abs/{arxiv_id}")
+        return pdf_out
     else:
         content, filename = fetch_webpage(url)
 
