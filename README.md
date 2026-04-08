@@ -148,6 +148,11 @@ Claude searches the wiki, synthesizes an answer with citations, and optionally f
 - **Knowledge compounds.** Every source makes the wiki richer. Every question can become a permanent thread.
 - **Same initialization.** Copy the template for any new research topic. The structure is domain-agnostic.
 
+## References
+
+- [Andrej Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — the original idea of LLM-maintained personal knowledge bases
+- [Graphify](https://github.com/safishamsi/graphify) — token-efficient knowledge graph framework; LabWiki borrows its hashlog caching, tiered search, and parallel agent patterns
+
 ## License
 
 MIT
