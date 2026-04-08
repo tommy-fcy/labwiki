@@ -29,6 +29,7 @@ If the `topic` field above is empty, this is a fresh copy of LabWiki. Before doi
 project-root/
 ├── CLAUDE.md              # This file — schema and instructions
 ├── .gitignore
+├── tools/                 # Utility scripts (fetch.py, etc.)
 ├── raw/                   # Immutable source materials (user-managed, Claude reads only)
 │   ├── papers/            # Academic papers (PDF, markdown)
 │   ├── notes/             # Personal notes, meeting notes, journal entries

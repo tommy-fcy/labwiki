@@ -98,6 +98,7 @@ Three layers:
 ```
 labwiki/
 ├── CLAUDE.md              # Schema — the brain of the system
+├── tools/                 # Utility scripts (fetch.py, etc.)
 ├── raw/                   # Your source materials (immutable)
 │   ├── papers/            # Academic papers
 │   ├── notes/             # Personal notes, meeting notes

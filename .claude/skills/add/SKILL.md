@@ -1,67 +1,57 @@
 ---
 name: add
-description: Fetch a source and save it to the appropriate raw/ subdirectory. Pure download — NO summarization, NO analysis, NO wiki processing. Use /ingest for that.
-argument-hint: <path-or-url> [paper|note|experiment|ref]
-allowed-tools: Read Write Bash WebFetch Glob
+description: Fetch a source and save it to the appropriate raw/ subdirectory. Uses tools/fetch.py for zero-token downloads. NO summarization, NO wiki processing.
+argument-hint: <url> [paper|note|experiment|ref]
+allowed-tools: Bash Read Glob
 ---
 
 # Add Source to Raw
 
 Input: $ARGUMENTS
 
-**CRITICAL: This skill is a pure fetch/save operation. Do NOT summarize, analyze, or extract key points. Just download and save the raw content. All analysis happens later via `/ingest`.**
+**This skill calls `tools/fetch.py` via Bash. Zero LLM tokens for the actual download.**
 
 ## Steps
 
 1. **Parse arguments**
-   - First argument: path or URL
+   - First argument: URL
    - Second argument (optional): category — `paper`, `note`, `experiment`, `ref`
-   - If category is omitted, infer:
-     - arXiv URL, `.pdf` → `paper`
-     - `.md`, `.txt` → `note`
-     - `.csv`, `.xlsx`, data files → `experiment`
-     - everything else → `ref`
 
-2. **Determine target directory**
+2. **Run fetch.py**
 
-   | Category | Directory |
-   |----------|-----------|
-   | paper | `raw/papers/` |
-   | note | `raw/notes/` |
-   | experiment | `raw/experiments/` |
-   | ref | `raw/refs/` |
+   If category is provided:
+   ```bash
+   python tools/fetch.py "<url>" --category <category>
+   ```
 
-3. **Fetch and save** (per source type)
+   If no category (auto-detect):
+   ```bash
+   python tools/fetch.py "<url>"
+   ```
 
-   **arXiv PDF URL** (`arxiv.org/pdf/...`):
-   - WebFetch CANNOT download binary PDFs.
-   - Convert to abstract URL: replace `/pdf/` with `/abs/`
-   - Use WebFetch on the abstract URL
-   - Save the fetched content AS-IS to `raw/papers/{slug}.md` — do NOT rewrite or summarize
-   - Tell user: "PDF must be downloaded manually: https://arxiv.org/pdf/XXXX.XXXXX — save it to `raw/papers/`"
+3. **If fetch.py is not available** (e.g., no Python), fall back to:
+   - PDF/image URLs: `curl -L -o raw/<category>/<filename> "<url>"`
+   - Other URLs: use WebFetch and save raw content AS-IS
 
-   **arXiv abstract URL** (`arxiv.org/abs/...`):
-   - Use WebFetch to get the page
-   - Save the fetched content AS-IS to `raw/papers/{slug}.md`
-   - Tell user the PDF URL for manual download
+4. **Report the output** from fetch.py to the user. Remind: run `/ingest` to process into the wiki.
 
-   **Web URL** (article, blog, tweet):
-   - Use WebFetch to retrieve content
-   - Save the fetched markdown AS-IS to `raw/{category}/{slug}.md` — do NOT rewrite or summarize
+## What fetch.py handles automatically
 
-   **Google Doc URL**:
-   - Extract doc ID, use google_drive_fetch (if available)
-   - Save raw content to target directory
+| URL Type | Action | Output |
+|----------|--------|--------|
+| arXiv | Extracts title, authors, abstract | `raw/papers/arxiv_XXXX_XXXXX.md` |
+| PDF | Downloads binary file | `raw/papers/<filename>.pdf` |
+| Image | Downloads binary file | `raw/refs/<filename>.<ext>` |
+| Tweet/X | Fetches via oEmbed API | `raw/refs/<filename>.md` |
+| Webpage | Converts HTML to markdown | `raw/refs/<filename>.md` |
 
-   **Local file path**:
-   - The file is already on disk. Do NOT copy or move it.
-   - Just confirm: "File already at `{path}`, categorized as `{category}`. Run `/ingest` to process."
+All saved files include YAML frontmatter (source_url, type, title, captured_at).
 
-4. **Generate filename**
-   - Slug: lowercase, hyphens, max 60 chars
-   - Check for existing files — do not overwrite
+## Examples
 
-5. **Report**
-   - "Saved to: `raw/{category}/{filename}`"
-   - "Run `/ingest` to process into the wiki."
-   - Nothing else. No summary. No analysis.
+```
+/add https://arxiv.org/abs/2403.07378
+/add https://arxiv.org/pdf/2403.07378 paper
+/add https://x.com/karpathy/status/123456
+/add https://example.com/blog-post ref
+```
