@@ -339,6 +339,7 @@ When `/ingest` is called with no arguments:
 
 Read the source material thoroughly. Per-type guidance:
 - **PDF papers**: Use Read tool with `pages` parameter for large PDFs. Read in chunks if needed.
+- **Repos** (`raw/repos/`): Read the README first. Then scan key source files to understand purpose, architecture, and core ideas. Focus on what the repo does and why it matters, not line-by-line code review.
 - **Code**: Read files, understand purpose, architecture, key functions.
 - **Images**: View with Read tool. Describe contents.
 - **PPTX/DOCX/XLSX**: Use the corresponding skill (pptx, docx, xlsx).

@@ -18,4 +18,4 @@ This is the LabWiki template repository. It is not an active wiki — it contain
 - `tools/fetch.py` — Zero-token URL fetcher for `/add` skill
 - `.claude/skills/` — Slash commands: `/add`, `/ingest`, `/query`, `/checkpoint`, `/lint`
 - `wiki/` — Wiki scaffold files (index.md, synthesis.md, log.md) for project mode
-- `raw/` — Empty source directories
+- `raw/` — Empty source directories (`papers/`, `notes/`, `experiments/`, `refs/`, `repos/`)
