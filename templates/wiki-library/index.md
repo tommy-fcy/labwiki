@@ -8,7 +8,7 @@ updated: YYYY-MM-DD
 
 ## Areas (0)
 
-## Papers (0)
+## Sources (0)
 
 ## Concepts (0)
 

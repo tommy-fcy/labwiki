@@ -45,7 +45,7 @@ library-root/
 │   ├── log.md             # Chronological operation log (append-only)
 │   ├── landscape.md       # High-level overview across all areas
 │   ├── areas/             # Area overviews (one per research domain)
-│   ├── papers/            # Paper/source summaries (one per ingested source)
+│   ├── sources/           # Source summaries (one per ingested source — papers, blogs, notes, repos)
 │   ├── concepts/          # Theoretical concepts, ideas, phenomena
 │   ├── methods/           # Techniques, algorithms, tools, frameworks
 │   ├── threads/           # Cross-area investigations, comparisons, insights
@@ -115,7 +115,7 @@ Body sections:
 - **Key Concepts** — Wikilinks to core concepts
 - **Connections** — How this area relates to other areas
 
-### 2.3 Paper Page (`wiki/papers/src-{slug}.md`)
+### 2.3 Source Page (`wiki/sources/src-{slug}.md`)
 
 ```yaml
 ---
@@ -256,7 +256,7 @@ Body structure depends on `detail_level` — see Section 6.
 | Type | Pattern | Directory | Example |
 |------|---------|-----------|---------|
 | Area | `{slug}.md` | `wiki/areas/` | `compression.md` |
-| Paper | `src-{slug}.md` | `wiki/papers/` | `src-svd-llm.md` |
+| Source | `src-{slug}.md` | `wiki/sources/` | `src-svd-llm.md` |
 | Concept | `{slug}.md` | `wiki/concepts/` | `singular-value-decomposition.md` |
 | Method | `{slug}.md` | `wiki/methods/` | `svd-llm.md` |
 | Thread | `{slug}.md` | `wiki/threads/` | `pruning-vs-quantization.md` |
@@ -359,7 +359,7 @@ Present to the user:
 
 ### Step 3: Create Paper/Source Summary Page
 
-Create `wiki/papers/src-{slug}.md` with full frontmatter and body sections per the schema. Set the `area` field. Include wikilinks to all concept/method pages.
+Create `wiki/sources/src-{slug}.md` with full frontmatter and body sections per the schema. Set the `area` field. Include wikilinks to all concept/method pages.
 
 ### Step 4: Update or Create Concept Pages
 
@@ -529,7 +529,7 @@ If the answer is a significant cross-area insight or comparison worth preserving
 1. **Orphan pages** — files in `wiki/` subdirectories not listed in `index.md`
 2. **Broken wikilinks** — `[[...]]` targets with no matching file
 3. **Missing frontmatter** — required fields absent or empty for the page's type
-4. **Missing area** — papers/concepts/methods without an `area` field
+4. **Missing area** — sources/concepts/methods without an `area` field
 5. **Stale area pages** — area pages not updated after newer sources were ingested for that area
 6. **Duplicate entities** — overlapping aliases or very similar slugs
 7. **Index accuracy** — every wiki file has an index entry; every index entry has a file
@@ -551,9 +551,9 @@ Organized into sections by page type with counts in headings. Each entry is one 
 - [[compression]] — Model compression: quantization, pruning, SVD, distillation
 - [[reasoning]] — LLM reasoning capabilities and methods
 
-## Papers (N)
-- [[src-svd-llm]] — [compression] SVD-based LLM compression with truncation-aware whitening
-- [[src-chain-of-thought]] — [reasoning] Chain-of-thought prompting for reasoning
+## Sources (N)
+- [[src-svd-llm]] — paper — [compression] SVD-based LLM compression with truncation-aware whitening
+- [[src-chain-of-thought]] — paper — [reasoning] Chain-of-thought prompting for reasoning
 
 ## Concepts (N)
 - [[singular-value-decomposition]] — [compression] Matrix factorization for dimensionality reduction
@@ -624,7 +624,7 @@ SORT paper_count DESC
 
 ```dataview
 TABLE area, authors, year, venue
-FROM "wiki/papers"
+FROM "wiki/sources"
 WHERE type = "paper"
 SORT year DESC
 ```

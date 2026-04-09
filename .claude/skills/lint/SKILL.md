@@ -18,7 +18,7 @@ Run all 8 checks:
 4. **Stale pages** — pages not updated after newer related sources were ingested
 5. **Duplicate entities** — overlapping aliases or very similar slugs across concept/method pages
 6. **Index accuracy** — every wiki file has an index entry; every index entry has a file
-7. **Source backlinks** — `sources` list entries in concept/method pages match actual source pages in `wiki/papers/`
+7. **Source backlinks** — `sources` list entries in concept/method pages match actual source pages in `wiki/sources/`
 8. **Synthesis freshness** — `wiki/synthesis.md` references recent sources
 
 ## Process

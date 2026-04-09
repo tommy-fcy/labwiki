@@ -48,7 +48,7 @@ Determine the source type from the input:
    - Proposed concepts and methods to create/update
    - Connections to existing wiki content
 4. **WAIT for user confirmation** before proceeding
-5. **Create source summary page** in `wiki/papers/src-{slug}.md`
+5. **Create source summary page** in `wiki/sources/src-{slug}.md`
 6. **Update or create concept pages** in `wiki/concepts/`
 7. **Update or create method pages** in `wiki/methods/`
 8. **Cross-link** all created/updated pages bidirectionally

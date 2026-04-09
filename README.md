@@ -122,7 +122,7 @@ labwiki/
     ├── index.md           # Master catalog
     ├── log.md             # Operation log (append-only)
     ├── synthesis.md       # Evolving project thesis
-    ├── papers/            # Paper summaries
+    ├── sources/           # Source summaries (papers, blogs, notes, repos)
     ├── concepts/          # Theoretical concepts
     ├── methods/           # Techniques, tools, algorithms
     ├── experiments/       # Experiment tracking

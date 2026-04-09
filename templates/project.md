@@ -40,7 +40,7 @@ project-root/
 │   ├── index.md           # Master catalog of all wiki pages
 │   ├── log.md             # Chronological operation log (append-only)
 │   ├── synthesis.md       # Evolving project understanding and thesis
-│   ├── papers/            # Paper summaries (one per ingested paper)
+│   ├── sources/           # Source summaries (one per ingested source — papers, blogs, notes, repos)
 │   ├── concepts/          # Theoretical concepts, ideas, phenomena
 │   ├── methods/           # Techniques, algorithms, tools, frameworks, benchmarks
 │   ├── experiments/       # Experiment designs, results, analyses
@@ -82,7 +82,7 @@ related: []
 - `sources` — YAML list of source page slugs that informed this page (e.g., `[src-attention-is-all-you-need]`).
 - `related` — YAML list of related wiki page slugs. Maintain bidirectionally.
 
-### 2.2 Paper Page (`wiki/papers/src-{slug}.md`)
+### 2.2 Source Page (`wiki/sources/src-{slug}.md`)
 
 ```yaml
 ---
@@ -246,7 +246,7 @@ Body structure depends on `detail_level` — see Section 6.
 
 | Type | Pattern | Directory | Example |
 |------|---------|-----------|---------|
-| Paper | `src-{slug}.md` | `wiki/papers/` | `src-attention-is-all-you-need.md` |
+| Source | `src-{slug}.md` | `wiki/sources/` | `src-attention-is-all-you-need.md` |
 | Concept | `{slug}.md` | `wiki/concepts/` | `self-attention.md` |
 | Method | `{slug}.md` | `wiki/methods/` | `transformer.md` |
 | Experiment | `{slug}.md` | `wiki/experiments/` | `baseline-accuracy-test.md` |
@@ -346,7 +346,7 @@ Present to the user:
 
 ### Step 3: Create Paper/Source Summary Page
 
-Create `wiki/papers/src-{slug}.md` with full frontmatter and body sections per the schema. Include wikilinks to all entity/concept/method pages.
+Create `wiki/sources/src-{slug}.md` with full frontmatter and body sections per the schema. Include wikilinks to all entity/concept/method pages.
 
 ### Step 4: Update or Create Concept Pages
 
@@ -531,9 +531,9 @@ Structured report with a Summary line, then each category (listing issues found 
 Organized into sections by page type with counts in headings. Each entry is one line: wikilink + description.
 
 ```markdown
-## Papers (N)
-- [[src-attention-is-all-you-need]] — Introduces transformer architecture with self-attention mechanism
-- [[src-bert]] — Pre-trained bidirectional representations for NLP
+## Sources (N)
+- [[src-attention-is-all-you-need]] — paper — Introduces transformer architecture with self-attention mechanism
+- [[src-bert]] — paper — Pre-trained bidirectional representations for NLP
 
 ## Concepts (N)
 - [[self-attention]] — Mechanism for computing token-to-token relevance
@@ -603,7 +603,7 @@ Append-only. Each entry is an H2 heading with ISO date, operation type, and brie
 
 ```dataview
 TABLE authors, year, venue
-FROM "wiki/papers"
+FROM "wiki/sources"
 WHERE type = "paper"
 SORT year DESC
 ```

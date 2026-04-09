@@ -22,7 +22,7 @@ Parse arguments:
 ## Steps
 
 1. **Gather metrics** — count all wiki pages by type:
-   - Count files in `wiki/papers/`, `wiki/concepts/`, `wiki/methods/`, `wiki/experiments/`, `wiki/threads/`
+   - Count files in `wiki/sources/`, `wiki/concepts/`, `wiki/methods/`, `wiki/experiments/`, `wiki/threads/`
    - Read the last checkpoint (if any) to compute deltas
 
 2. **Determine checkpoint ID** — scan `wiki/checkpoints/`, new ID = max(existing) + 1, first = 1

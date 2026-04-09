@@ -6,7 +6,7 @@ updated: 2026-04-07
 
 > Auto-maintained by Claude Code. Do not edit manually.
 
-## Papers (0)
+## Sources (0)
 
 ## Concepts (0)
 
