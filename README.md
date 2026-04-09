@@ -108,26 +108,23 @@ Three layers:
 
 ## Directory structure
 
+**Project mode:**
 ```
-labwiki/
-├── CLAUDE.md              # Schema — the brain of the system
-├── tools/                 # Utility scripts (fetch.py, etc.)
-├── raw/                   # Your source materials (immutable)
-│   ├── papers/            # Academic papers
-│   ├── notes/             # Personal notes, meeting notes
-│   ├── experiments/       # Experiment data, results
-│   └── refs/              # Slides, docs, web clips, misc
-├── code/                  # Project code, scripts, notebooks
-└── wiki/                  # Claude-maintained knowledge base
-    ├── index.md           # Master catalog
-    ├── log.md             # Operation log (append-only)
-    ├── synthesis.md       # Evolving project thesis
-    ├── sources/           # Source summaries (papers, blogs, notes, repos)
-    ├── concepts/          # Theoretical concepts
-    ├── methods/           # Techniques, tools, algorithms
-    ├── experiments/       # Experiment tracking
-    ├── threads/           # Research investigations
-    └── checkpoints/       # Milestone snapshots
+wiki/
+├── index.md, log.md, synthesis.md
+├── sources/           # Reading records (papers, blogs, repos, notes)
+├── experiments/       # Experiment tracking
+├── threads/           # Cross-source investigations and accumulated topic knowledge
+└── checkpoints/       # Milestone snapshots
+```
+
+**Library mode:**
+```
+wiki/
+├── index.md, log.md, landscape.md
+├── areas/             # One overview page per research domain
+├── sources/           # Reading records (papers, blogs, repos, notes)
+└── checkpoints/       # Periodic review snapshots
 ```
 
 ## Slash commands

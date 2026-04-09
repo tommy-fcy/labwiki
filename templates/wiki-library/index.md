@@ -10,10 +10,4 @@ updated: YYYY-MM-DD
 
 ## Sources (0)
 
-## Concepts (0)
-
-## Methods (0)
-
-## Threads (0)
-
 ## Checkpoints (0)

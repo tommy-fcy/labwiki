@@ -8,10 +8,6 @@ updated: 2026-04-07
 
 ## Sources (0)
 
-## Concepts (0)
-
-## Methods (0)
-
 ## Experiments (0)
 
 ## Threads (0)
