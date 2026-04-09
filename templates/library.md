@@ -38,6 +38,7 @@ library-root/
 ├── raw/                   # Immutable source materials (user-managed, Claude reads only)
 │   ├── papers/            # Academic papers (PDF, metadata markdown)
 │   ├── notes/             # Personal notes, meeting notes, journal entries
+│   ├── repos/             # Interesting repositories and codebases
 │   └── refs/              # Blog posts, tweets, web clips, slides, misc
 ├── wiki/                  # Claude-maintained knowledge base
 │   ├── index.md           # Master catalog of all wiki pages
@@ -121,7 +122,7 @@ Body sections:
 title: "Paper Title"
 type: paper
 area: "compression"
-source_type: journal | conference | preprint | thesis | report | book-chapter | survey | blog | tweet | note
+source_type: journal | conference | preprint | thesis | report | book-chapter | survey | blog | tweet | note | repo
 authors: ["Last, First", "Last, First"]
 year: 2024
 venue: "NeurIPS 2024"
@@ -324,7 +325,9 @@ When `/ingest` is called with no arguments:
    - `.docx` → document (use docx skill)
    - `.csv`, `.xlsx` → data (use xlsx skill)
    - URL → website (use WebFetch)
+   - GitHub repo URL → repo (clone or read README via WebFetch)
    - Google Doc URL → extract document ID, use google_drive_fetch MCP tool (if available)
+   - Directory in `raw/repos/` → repo (read README, key source files)
 
 2. **Check hashlog.** Compute SHA256 of the source file. If the hash exists in `wiki/.hashlog`, this file was already ingested. Inform user and ask whether to re-ingest (update) or skip.
 
